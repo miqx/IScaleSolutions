@@ -13,7 +13,9 @@ class NewsManager extends AbstractHelper
 	}
 
 	/**
-	* list all news
+	* List all news.
+	*
+	* @return News[]
 	*/
 	public function listNews()
 	{
@@ -33,9 +35,12 @@ class NewsManager extends AbstractHelper
 	}
 
 	/**
-	* add a record in news table
+	* Add a record in news table
+	* @param string $title
+	* @param string $string
+	* @return int
 	*/
-	public function addNews($title, $body)
+	public function addNews(string $title, string $body)
 	{
 		$db = DB::getInstance();
 		$sql = "INSERT INTO `news` (`title`, `body`, `created_at`) VALUES('". $title . "','" . $body . "','" . date('Y-m-d') . "')";
@@ -44,9 +49,11 @@ class NewsManager extends AbstractHelper
 	}
 
 	/**
-	* deletes a news, and also linked comments
+	* Deletes a news, and also linked comments
+	* @param int $id
+	* @return mixed
 	*/
-	public function deleteNews($id)
+	public function deleteNews(int $id)
 	{
 		$comments = CommentManager::getInstance()->listComments();
 		$idsToDelete = [];

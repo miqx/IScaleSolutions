@@ -12,6 +12,10 @@ class CommentManager extends AbstractHelper
 		require_once(ROOT . '/class/Comment.php');
 	}
 
+	/**
+	 * Lists Comments
+	 * @return Comment[]
+	 */
 	public function listComments()
 	{
 		$db = DB::getInstance();
@@ -29,7 +33,13 @@ class CommentManager extends AbstractHelper
 		return $comments;
 	}
 
-	public function addCommentForNews($body, $newsId)
+	/**
+	 * Adds comments on news
+	 * @param string $body
+	 * @param int $newsId
+	 * @return int
+	 */
+	public function addCommentForNews(string $body, int $newsId)
 	{
 		$db = DB::getInstance();
 		$sql = "INSERT INTO `comment` (`body`, `created_at`, `news_id`) VALUES('". $body . "','" . date('Y-m-d') . "','" . $newsId . "')";
@@ -37,7 +47,12 @@ class CommentManager extends AbstractHelper
 		return $db->lastInsertId($sql);
 	}
 
-	public function deleteComment($id)
+	/**
+	 * Deletes Comments
+	 * @param int $id
+	 * @return mixed
+	 */
+	public function deleteComment(int $id)
 	{
 		$db = DB::getInstance();
 		$sql = "DELETE FROM `comment` WHERE `id`=" . $id;
